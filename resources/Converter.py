@@ -76,14 +76,14 @@ class UrlConverter:
 		"""Convert the list of websites to the new domain urls"""
 
 		# Create a new file to save all new url names
-		newFileName = 'output/' + self.website_list + self.domain
+		newFileName = 'output/' + self.website_list.split(".txt")[0] + self.domain
 		# Open the nem file
 		newFile = open(newFileName, "w")
 		# Convert every line and add it to the new file
 		with open(self.website_list, "r") as file:
 			for line in file:
 				line.rstrip("/\n")
-				newUrl = self.convertUrl(line)
+				newUrl = self.convertUrl(line) + "\n"
 				newFile.write(newUrl)
 		newFile.close()
 		return newFileName
@@ -100,6 +100,6 @@ class UrlConverter:
 			url = url.replace("www.", "")
 
 		# Replace domain with your own domain
-		url.split(".")[0] + self.domain + "\n"
+		url = url.split(".")[0] + self.domain
 
 		return url
