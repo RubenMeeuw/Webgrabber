@@ -1,6 +1,7 @@
 from shutil import copyfile
 from subprocess import call
 from resources.websiteCrawler import Grabber
+from resources.webPackageCreator import WebPackageCreator
 from resources.Converter import ( LinkConverter, UrlConverter )
 import os
 import json
@@ -22,6 +23,9 @@ def main():
 
 	grabber = Grabber(config)
 	grabber.execute()
+
+	webPackageCreator = WebPackageCreator(config)
+	webPackageCreator.createFiles()
 
 if __name__ == '__main__':
 	main()

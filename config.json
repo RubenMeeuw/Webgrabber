@@ -1,6 +1,7 @@
 {
 	"NEW_DOMAIN": ".domain",
 	"IP_PREFIX": "10.9.9.",
+	"NETMASK": "255.0.0.0",
 	"WEB": {
 		"WEB_OUTPUT": "output/web_server_package",
 		"CRAWL_LIST": "websites.txt",

@@ -41,11 +41,14 @@ class Grabber:
 	        		self.getWebsite(line.rstrip('\n'))
 
 	def clearGrabbedFolder(self):
+		"""Clear all previous grabbed websites from the folder"""
+
 		if os.path.exists(self.output_grabbed_websites):
 			shutil.rmtree(self.output_grabbed_websites)
 
 	def execute(self):
 		"""Start the grabbing process"""
+
 		# Remove all old files
 		self.clearGrabbedFolder()
 
