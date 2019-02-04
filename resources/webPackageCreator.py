@@ -61,7 +61,7 @@ class WebPackageCreator:
 		"""Add an install script to the set up folder of the websites"""
 
 		call(['chmod', '+xr', self.install_web])
-		copyfile(self.install_web, os.path.join(self.output, "install.py"))
+		copyfile(self.install_web, os.path.join(self.output, "install.sh"))
 
 	# def randomGenerateUniqueIP(self, mask, srange, erange):
 	# 	if (mask = 24):
@@ -70,6 +70,7 @@ class WebPackageCreator:
 	#
 	# 	else:
 	# 		raise Exception('An invalid mask is used')
+
 
 	def createFiles(self):
 		"""Create all files for the web packages"""
@@ -101,3 +102,9 @@ class WebPackageCreator:
 					x += 1
 		interfaceFile.close()
 		portsFile.close()
+
+	def create(self):
+		"""Execute the functions to create the web package"""
+
+		self.createFiles()
+		self.copyWebInstallFileToPackage()

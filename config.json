@@ -7,7 +7,7 @@
 		"CRAWL_LIST": "websites.txt",
 		"CRAWL_LIST_NEW_DOMAIN": "resources/websites_new_domain.txt",
 		"DEFAULT_INTERFACE": "resources/default_files_web/default_interface",
-		"WEB_INSTALL_FILE": "resources/default_files_web/install_web.py"
+		"WEB_INSTALL_FILE": "resources/installFiles/install_web.sh"
 	},
 	"DNS": {
 		"DNS_OUTPUT": "output/dns_server_package",

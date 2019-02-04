@@ -25,7 +25,7 @@ def main():
 	grabber.execute()
 
 	webPackageCreator = WebPackageCreator(config)
-	webPackageCreator.createFiles()
+	webPackageCreator.create()
 
 if __name__ == '__main__':
 	main()
