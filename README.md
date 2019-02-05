@@ -8,7 +8,7 @@ This python script consist of three elements.
 **Note: use the generated content only for local testing purposes. Do not deploy any of the generated content on the open web. I am not responsible for any negative effects that may result from this.**
 
 ## Getting Started
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
+These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
 
 ### Prerequisites
 On your system you will need to have python2 to run the script.
