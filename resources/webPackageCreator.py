@@ -16,7 +16,6 @@ class WebPackageCreator:
 		self.output = self.config['WEB']['WEB_OUTPUT']
 		self.output_grabbed_websites = self.output + '/grabbedWebsites'
 		self.install_web = self.config['WEB']['WEB_INSTALL_FILE']
-		self.default_interface = self.config['WEB']['DEFAULT_INTERFACE']
 		self.ip_prefix = self.config['IP_PREFIX']
 		self.netmask = self.config['NETMASK']
 		self.newWebListFile =  os.path.join(self.output + "/../",self.website_list.split('.txt')[0] + self.domain)
