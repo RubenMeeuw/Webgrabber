@@ -2,6 +2,7 @@ from shutil import copyfile
 import os
 from subprocess import call
 import random
+import logging
 
 class WebPackageCreator:
 	"""This class creates the files needed for the webserver for all grabbed websites"""
@@ -19,6 +20,8 @@ class WebPackageCreator:
 		self.ip_prefix = self.config['IP_PREFIX']
 		self.netmask = self.config['NETMASK']
 		self.newWebListFile =  os.path.join(self.output + "/../",self.website_list.split('.txt')[0] + self.domain)
+
+		logging.getLogger()
 
 	def writePortsFile(self, file, IP):
 		#TODO make port variable

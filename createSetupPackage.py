@@ -7,8 +7,12 @@ from resources.Converter import ( LinkConverter, UrlConverter )
 import os
 import json
 import sys, getopt
+import logging
 
 linkparser = False
+logging.basicConfig()
+logger = logging.getLogger()
+
 
 def createOutputFolder():
 	""" Create an output folder if does not exit yet """
@@ -19,7 +23,7 @@ def createOutputFolder():
 
 def handleOptions(argv):
    try:
-	   opts, args = getopt.getopt(argv,"hvl",[])
+	   opts, args = getopt.getopt(argv,"hvld",[])
    except getopt.GetoptError:
 	   print 'Use createSetupPackage.py -h for help of using commands'
 	   sys.exit(2)
@@ -28,9 +32,8 @@ def handleOptions(argv):
 		 print 'Usage:'
 		 print '"createSetupPackage.py -h" for help'
 		 print '"createSetupPackage.py -v" for version'
-		 print '"createSetupPackage.py -l" for using linkconverter'
-		 print 'Linkconverter converts all hyperlinks in the webfiles to redirect to each other.'
-		 print 'This may take a long time'
+		 print '"createSetupPackage.py -d" for showing debug logging'
+		 print '"createSetupPackage.py -l" for using linkconverter - Linkconverter converts all hyperlinks in the webfiles to redirect to each other. This may take a long time'
 		 sys.exit()
 	   elif opt == '-v':
 		   print 'WebGrabber Version 1.0 created by Ruben Meeuwissen 2018-2019'
@@ -40,10 +43,15 @@ def handleOptions(argv):
 	   elif opt == '-l':
 		   global linkparser
 		   linkparser = True
+	   elif opt == '-d':
+		   logger.setLevel(logging.DEBUG)
+		   logger.debug("Debugging is enabled")
 
 
 def main(argv):
 	""" The main function of the program """
+
+	logger.setLevel(logging.INFO)
 	handleOptions(argv)
 	# Load the config file
 	configfile = 'config.json'
@@ -52,12 +60,15 @@ def main(argv):
 
 	createOutputFolder()
 
+	logger.info("Start the grabbing process")
 	grabber = Grabber(config, linkparser)
 	grabber.execute()
 
+	logger.info("Start creating the web package")
 	webPackageCreator = WebPackageCreator(config)
 	webPackageCreator.create()
 
+	logger.info("Start creating the dns package")
 	dnsPackageCreator = DNSCreater(config)
 	dnsPackageCreator.create()
 
