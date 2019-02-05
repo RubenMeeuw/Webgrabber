@@ -1,7 +1,7 @@
 import os
 import fnmatch
 from random import randint
-# import config
+import logging
 
 class LinkConverter:
 	"""Class to change all the links in the grabbed folder to point to each other."""
@@ -13,20 +13,24 @@ class LinkConverter:
 
 		self.website_list = self.config['WEB']['CRAWL_LIST']
 		self.output = self.config['WEB']['WEB_OUTPUT']
-		self.crawl_list_new_domain = self.config['WEB']['CRAWL_LIST_NEW_DOMAIN']
+		self.domain =self.config['NEW_DOMAIN']
+		self.crawl_list_new_domain = os.path.join(self.output + "/../",self.website_list.split('.txt')[0] + self.domain)
+
+		logging.getLogger()
 
 	def convertFolder(self, folderName):
 		"""Convert all the links in the files in the specified folder and subfolders"""
-		global count
-		count = 0
+
+		self.count = 0
 		linksArray = self.createLinksArray()
 		for directory, subdirectories, filenames in os.walk(folderName):
 			for filename in filenames:
 				self.convertFile(os.path.join(directory,filename), linksArray)
-		print "There were {} links converted in {}".format(count, os.path.basename(os.path.normpath(folderName)))
+		logging.debug("There were {} links converted in {}".format(self.count, os.path.basename(os.path.normpath(folderName))))
 
 	def convertFile(self, input, linksArray):
 		"""Substitute all the links in the specified foler with a random fake website"""
+
 		newFile = open(input + ".tmp", "w")
 		with open(input, "r") as file:
 			for line in file:
@@ -36,13 +40,13 @@ class LinkConverter:
 
 	def convertLine(self, line, linksArray):
 		"""Substitute the http link in the line with a fake website"""
+
 		hrefOptions = ["href=\"http", "href= \"http", "href = \"http", "href=\'http", "href= \'http", "href = \'http"]
 		hrefCommaOption = ["\"", "\"", "\"", "\'", "\'", "\'"]
 		for i in range(0, len(hrefOptions)):
 			elements = line.split(hrefOptions[i])
 			if(len(elements) > 1):
-				global count
-				count += 1
+				self.count += 1
 				head = elements[0]
 				link = "href=\"http://" + self.getRandomLink(linksArray) + "\""
 				tail = elements[1].split(hrefCommaOption[i], 1)[1]
@@ -52,10 +56,12 @@ class LinkConverter:
 
 	def getRandomLink(self, array):
 		"""Get a random fake website"""
+
 		return array[randint(0, len(array)-1)]
 
 	def createLinksArray(self):
 		"""Create an array from all possible fake websites"""
+
 		with open(self.crawl_list_new_domain, "r") as web:
 			websites = [x.strip("\n") for x in web.readlines()]
 		return websites

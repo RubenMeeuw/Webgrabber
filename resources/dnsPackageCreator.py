@@ -1,6 +1,7 @@
 from shutil import copyfile
 import os
 from subprocess import call
+import logging
 
 class DNSCreater:
 	"""This class can create the according dns files for a webserver"""
@@ -15,7 +16,6 @@ class DNSCreater:
 		self.ip_prefix = self.config['IP_PREFIX']
 		self.website_list = self.config['WEB']['CRAWL_LIST']
 		self.newWebListFile =  os.path.join(self.output + "/../",self.website_list.split('.txt')[0] + self.domain)
-
 
 	def writeDNSFile(self, dnsFile, url, IP):
 		"""Create a domainname for the ip"""

@@ -4,10 +4,11 @@ import os
 from Converter import ( UrlConverter, LinkConverter )
 # import config
 import json
+import logging
 
 class Grabber:
 
-	def __init__(self, config):
+	def __init__(self, config, linkparser):
 		"""Initialise a web grabber."""
 
 		self.config = config
@@ -21,13 +22,15 @@ class Grabber:
 		self.urlConverter = UrlConverter(self.config)
 		self.linkConverter = LinkConverter(self.config)
 
-		# TODO set this option as a command
-		self.convertLinks = False
+		self.convertLinks = linkparser
+
+		logging.getLogger()
+
 
 	def getWebsite(self, url):
 		"""Use wget command to retrieve recursively all files of website"""
 
-		print "Crawling {} from the web...".format(url)
+		logging.debug("Crawling {} from the web...".format(url))
 		call(['wget', url, '--recursive', '--convert-links',
 		'--page-requisites', '--continue', '--tries=5',
 		'--directory-prefix=' + self.output_grabbed_websites + "/" + self.urlConverter.convertUrl(url), '--retry-connrefused',
@@ -43,6 +46,7 @@ class Grabber:
 	def clearGrabbedFolder(self):
 		"""Clear all previous grabbed websites from the folder"""
 
+		logging.debug("Clearing grabbed website folder")
 		if os.path.exists(self.output_grabbed_websites):
 			shutil.rmtree(self.output_grabbed_websites)
 
@@ -60,5 +64,6 @@ class Grabber:
 
 		# Optionally convert the links in the grabbed website to point to each otherself.
 		if (self.convertLinks):
+			logging.debug('Converting links')
 			for f in os.listdir(self.output_grabbed_websites):
-				self.linkConvert.convertFolder(os.path.join(self.output_grabbed_websites, f))
+				self.linkConverter.convertFolder(os.path.join(self.output_grabbed_websites, f))
