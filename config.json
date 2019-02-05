@@ -5,7 +5,6 @@
 	"WEB": {
 		"WEB_OUTPUT": "output/web_server_package",
 		"CRAWL_LIST": "websites.txt",
-		"CRAWL_LIST_NEW_DOMAIN": "resources/websites_new_domain.txt",
 		"WEB_INSTALL_FILE": "resources/installFiles/install_web.sh"
 	},
 	"DNS": {

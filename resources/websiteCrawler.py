@@ -7,7 +7,7 @@ import json
 
 class Grabber:
 
-	def __init__(self, config):
+	def __init__(self, config, linkparser):
 		"""Initialise a web grabber."""
 
 		self.config = config
@@ -21,8 +21,7 @@ class Grabber:
 		self.urlConverter = UrlConverter(self.config)
 		self.linkConverter = LinkConverter(self.config)
 
-		# TODO set this option as a command
-		self.convertLinks = False
+		self.convertLinks = linkparser
 
 	def getWebsite(self, url):
 		"""Use wget command to retrieve recursively all files of website"""
@@ -60,5 +59,6 @@ class Grabber:
 
 		# Optionally convert the links in the grabbed website to point to each otherself.
 		if (self.convertLinks):
+			print 'Converting links'
 			for f in os.listdir(self.output_grabbed_websites):
-				self.linkConvert.convertFolder(os.path.join(self.output_grabbed_websites, f))
+				self.linkConverter.convertFolder(os.path.join(self.output_grabbed_websites, f))
