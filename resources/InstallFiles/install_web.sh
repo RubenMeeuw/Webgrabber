@@ -5,17 +5,26 @@ interfacefile='interfaces'
 portsfile='ports.conf'
 
 clean=0
-getopts "hvd:w:" name
-while [ "$name" != "?" ] ; do
+while getopts "cvh" name ; do
   case $name in
    c) clean=1;;
+   v)
+    echo "Version 1.0 made by Ruben Meeuwissen"
+    exit 0;;
+   h)
+    echo "Usage:"
+    echo "./install.sh -h to get this help message"
+    echo "./install.sh -v to get the version"
+    echo "./install.sh -c to run the installation with a clean before installing"
+    echo "./install.sh without arguments to do only installation."
+    echo "Use sudo for this command"
+    exit 0;;
   esac
-  getopts "hvd:w:" name
 done
 
-clean () {
-	enabledFolderFiles = "$(ls /etc/apache2/sites-enabled)"
-	availableFolderFiles = "$(ls /etc/apache2/sites-available)"
+cleansites () {
+	enabledFolderFiles="$(ls /etc/apache2/sites-enabled)"
+	availableFolderFiles="$(ls /etc/apache2/sites-available)"
 	for filename in $enabledFolderFiles
   do
 		# remove from enabled websites
@@ -67,7 +76,7 @@ copyPorts () {
 # Call the functions
 
 if [ $clean -eq 1 ]
-then Clean
+then cleansites
 fi
 
 copyWebsites
