@@ -14,7 +14,7 @@
 		"DEFAULT_DNS": "resources/default_files_dns/default_dns",
 		"DEFAULT_NAMED_CONF": "resources/default_files_dns/default_named_conf",
 		"DEFAULT_REVERSE_DNS": "resources/default_files_dns/default_reverse_dns",
-		"DNS_INSTALL_FILE": "resources/default_files_dns/install_dns.py"
+		"DNS_INSTALL_FILE": "resources/installFiles/install_dns.sh"
 	},
 	"DNS_MAPPER":{
 		"DNS_MAPPER_OUTPUT": "output/dns_mapper_package",

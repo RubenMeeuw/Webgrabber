@@ -103,3 +103,4 @@ class DNSCreater:
 
 		self.createFiles()
 		self.createNamedConfExtension()
+		self.copyDNSInstallFileToPackage()
