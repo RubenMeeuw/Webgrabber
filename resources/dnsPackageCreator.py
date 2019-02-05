@@ -10,9 +10,6 @@ class DNSCreater:
 
 		self.config = config
 		self.output = self.config['DNS']['DNS_OUTPUT']
-		self.default_dns = self.config['DNS']['DEFAULT_DNS']
-		self.default_named_conf = self.config['DNS']['DEFAULT_NAMED_CONF']
-		self.default_reverse_dns = self.config['DNS']['DEFAULT_REVERSE_DNS']
 		self.dns_install_file = self.config['DNS']['DNS_INSTALL_FILE']
 		self.domain = self.config['NEW_DOMAIN']
 		self.ip_prefix = self.config['IP_PREFIX']
